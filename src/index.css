@@ -5,3 +5,10 @@
 ::-webkit-inner-spin-button,::-webkit-outer-spin-button{
     display: none;
 }
+
+.loginLogo{
+    background: url('./assets/login.svg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

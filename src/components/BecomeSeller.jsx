@@ -4,8 +4,7 @@ import Button from "./Button";
 import Label from "./Label";
 
 const BecomeSeller = () => {
-
-   return (
+  return (
     <div className=" p-8 sm:px-20 sm:py-10">
       <div className="border-b border-gray-900/10 pb-12">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -14,7 +13,6 @@ const BecomeSeller = () => {
         <p className="mt-1 text-sm leading-6 text-gray-600">
           Use a permanent address where you can receive mail.
         </p>
-
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
           <div className="sm:col-span-3">
             <Label htmlFor="firstName">First name</Label>
@@ -28,16 +26,9 @@ const BecomeSeller = () => {
             <Label htmlFor="email">Email address</Label>
             <Input name="email" type="email" />
           </div>
-          <div className="sm:col-span-3">
+          <div className="sm:col-span-2">
             <Label htmlFor="country">Country</Label>
-            <select
-              name="country"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-            >
-              <option value="United States">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="Mexico">Mexico</option>
-            </select>
+            <Input type="text" name="country" />
           </div>
           <div className="col-span-full">
             <Label htmlFor="streetAddress">Street address</Label>

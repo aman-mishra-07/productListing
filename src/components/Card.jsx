@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../contexts/CartContext'
+import { authContext } from '../contexts/AuthContext';
 
 const Card = ({product}) => {
   const {cart, dispatch, ACTION} = useContext(CartContext)
+  const { loggedIn, showToast } = useContext(authContext)
   const existsInCart = cart.find((p) => p.id === product.id)
   const handleAddToCart = (e) => {
     e.preventDefault();
+    if(!loggedIn) return showToast('login first');
     if(existsInCart) return;
     dispatch({
       type : ACTION.Add,
