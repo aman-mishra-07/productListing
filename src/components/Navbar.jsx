@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full z-50 px-4 py-2 sm:p-4 bg-white dark:bg-blue-600 space-y-2 dark:text-white shadow-md ">
+      <div className="w-full sticky top-0 z-50 px-4 py-2 sm:p-4 bg-white dark:bg-blue-600 space-y-2 dark:text-white shadow-md ">
         <div className="container mx-auto flex items-center justify-between sm:justify-evenly">
           <Link to="/" className="font-semibold flex items-center gap-1">
             <Logo />
@@ -76,7 +76,7 @@ const Navbar = () => {
             {loggedIn ? (
               <>
                 <Link
-                  to="/login"
+                  to="/profile"
                   className="font-semibold flex items-center gap-1"
                 >
                   <FaRegCircleUser size={20} />

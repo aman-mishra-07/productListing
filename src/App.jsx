@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useReducer, useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { cartReducer, ACTION } from "./reducers/cartReducer";
 import { CartContext } from "./contexts/CartContext";
@@ -23,24 +23,21 @@ const App = () => {
     localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : []
   );
 
-  useEffect(() => {
-    console.log(loggedIn);
-  },[loggedIn])
   const getData = async (api) => {
     try {
       const response = await axios.get(api);
       if (response.status === 200) {
         const data = response.data;
-        setProducts(data.products);
+        setProducts([...products, ...data.products]);
       }
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    getData("https://dummyjson.com/products");
+    getData("https://dummyjson.com/products/");
   }, []);
-  const showToast = (message) => toast(message)
+  const showToast = (message) => toast(message);
 
   const updateLocalStorage = useCallback(() => {
     try {
@@ -56,21 +53,29 @@ const App = () => {
 
   return (
     <div>
-      <authContext.Provider value={{loggedIn, setLoggedIn, showToast}}>
-      <ProductContext.Provider value={{ products, setProducts, getData }}>
-        <CartContext.Provider value={{ cart, dispatch, ACTION }}>
-          <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />}/>
-              <Route path="/cart" element={<ProtectedRoutes><Cart /></ProtectedRoutes>}></Route>
-              <Route path="/becomeSeller" element={<BecomeSeller />}></Route>
-              <Route path="/login" element={loggedIn ? <Profile/> : <Login />}></Route>
-            </Routes>
-            <ToastContainer/>
-          </BrowserRouter>
-        </CartContext.Provider>
-      </ProductContext.Provider>
+      <authContext.Provider value={{ loggedIn, setLoggedIn, showToast }}>
+        <ProductContext.Provider value={{ products, setProducts, getData }}>
+          <CartContext.Provider value={{ cart, dispatch, ACTION }}>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoutes>
+                      <Cart />
+                    </ProtectedRoutes>
+                  }
+                ></Route>
+                <Route path="/becomeSeller" element={<BecomeSeller />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/profile" element={<Profile />}></Route>
+              </Routes>
+              <ToastContainer />
+            </BrowserRouter>
+          </CartContext.Provider>
+        </ProductContext.Provider>
       </authContext.Provider>
     </div>
   );
